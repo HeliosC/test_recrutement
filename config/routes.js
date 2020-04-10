@@ -24,6 +24,8 @@ module.exports.routes = {
   'post /rides/getAllOffers': 'RidesController.getAllOffers',
   'get /rides/search': { view: 'rides/search'},
 
+  'get /user/new': 'UserController.new',
+  'post /user/create': 'UserController.create',
 
   /***************************************************************************
   *                                                                          *

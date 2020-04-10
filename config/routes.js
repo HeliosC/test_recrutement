@@ -27,6 +27,9 @@ module.exports.routes = {
   'get /user/new': 'UserController.new',
   'post /user/create': 'UserController.create',
 
+  'get /session/new': 'SessionController.new',
+  'post /session/create': 'SessionController.create',
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

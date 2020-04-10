@@ -19,4 +19,14 @@ module.exports.policies = {
 
   // '*': true,
 
+  session: {
+    'new': true,
+    'create': true,
+    '*': false
+  },
+
+  rides: {
+    '*': "authentification"
+  }
+
 };

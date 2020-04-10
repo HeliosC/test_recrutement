@@ -21,6 +21,7 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
+  'post /rides/getAllOffers': 'RidesController.getAllOffers',
 
   /***************************************************************************
   *                                                                          *

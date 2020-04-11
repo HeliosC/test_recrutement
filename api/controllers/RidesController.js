@@ -9,8 +9,13 @@ var request = require('request');
 
 module.exports = {
     
-    'getAllOffers': function(req, res) {
+    'result': function(req, res) {
         getAllOffers(req,res);
+    },
+    'getAllOffers': function(req, res) {
+        identityCheck(req, res, function(req, res){
+            getAllOffers(req,res);
+        })
     },
     'getAllOffersWhithoutLoging': function(req, res) {
         getAllOffers(req,res);
@@ -18,8 +23,32 @@ module.exports = {
 
 };
 
+function identityCheck(req, res, next){
+    params = req.headers;
+
+    //Duplicate from SessionController
+    User.find({username: params.username}, function(err, user){
+        if(err){
+            res.send(err);
+        }
+        if(user == undefined) {
+            res.send("undefined user");
+        }
+        var user = user[0];
+        if(user.password == params.password){
+            req.session.authentificated = true;
+            req.session.user = user;
+            next(req, res);
+        }else{
+            res.send("unvalid password");
+        }
+    })
+}
+
 function getAllOffers(req, res){
-    var coordinates = req.body;
+
+    //In case we use the form
+    var coordinates = req.body == undefined ? req.query : req.body;
             
     var headers = {
         'x-api-key': process.env.API_Token,

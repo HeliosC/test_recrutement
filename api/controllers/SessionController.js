@@ -18,9 +18,13 @@ module.exports = {
 
         User.find({username: params.username}, function(err, user){
             if(err) return next(err);
-            if(user == undefined) return next(user)
-
+            
             var user = user[0];
+            if(user == undefined) {
+                res.redirect('/user/new')
+                return;
+            }
+
             if(user.password == params.password){
                 req.session.authentificated = true;
                 req.session.user = user;

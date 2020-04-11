@@ -13,10 +13,12 @@ module.exports = {
     },
 
     'create': function(req, res, next) {
+        //In case we create a session whit the sails create shortcut
         var params = req.body == undefined ? req.query : req.body;
 
         User.find({username: params.username}, function(err, user){
             if(err) return next(err);
+            if(user == undefined) return next(user)
 
             var user = user[0];
             if(user.password == params.password){

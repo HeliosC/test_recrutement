@@ -26,6 +26,7 @@ module.exports.policies = {
   },
 
   rides: {
+    'getAllOffersWhithoutLoging': true,
     '*': "authentification"
   }
 

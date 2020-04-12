@@ -5,8 +5,6 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
-var request = require('request');
-
 module.exports = {
     
     'result': function(req, res) {
@@ -35,7 +33,7 @@ function identityCheck(req, res, next){
             res.send("undefined user");
         }
         var user = user[0];
-        if(user.password == params.password){
+        if(require('password-hash').verify(params.password, user.password)){
             req.session.authentificated = true;
             req.session.user = user;
             next(req, res);
@@ -69,7 +67,7 @@ function getAllOffers(req, res){
         body: body
     };
     
-    request(options, callback);
+    require('request')(options, callback);
     
     function callback(error, response, body) {
         if(error){

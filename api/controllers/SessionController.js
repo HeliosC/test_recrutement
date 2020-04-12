@@ -25,7 +25,7 @@ module.exports = {
                 return;
             }
 
-            if(user.password == params.password){
+            if(require('password-hash').verify(params.password, user.password)){
                 req.session.authentificated = true;
                 req.session.user = user;
                 res.redirect('/rides/search')

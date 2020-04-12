@@ -33,6 +33,7 @@ function identityCheck(req, res, next){
         var user = user[0];
         if(user == undefined) {
             res.send("undefined user");
+            return;
         }
         if(require('password-hash').verify(params.password, user.password)){
             req.session.authentificated = true;

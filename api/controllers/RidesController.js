@@ -29,10 +29,11 @@ function identityCheck(req, res, next){
         if(err){
             res.send(err);
         }
+        
+        var user = user[0];
         if(user == undefined) {
             res.send("undefined user");
         }
-        var user = user[0];
         if(require('password-hash').verify(params.password, user.password)){
             req.session.authentificated = true;
             req.session.user = user;
